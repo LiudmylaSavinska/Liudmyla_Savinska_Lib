@@ -31,4 +31,8 @@
       <PackageReference Include="Testcontainers.MongoDb" Version="4.1.0-beta.11746011829" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Library.Test.Utils\Library.Test.Utils.csproj" />
+    </ItemGroup>
+
 </Project>

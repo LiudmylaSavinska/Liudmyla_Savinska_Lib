@@ -85,11 +85,36 @@ public class WebTablePage: IBasePage
         return this;
     }
 
-    public async Task<WebTablePage> FindRows()
+    public async Task<string[]> GetRowValues(int rowNumber)
+    {
+        var rowCells = Page!.Locator($"//div[@class='rt-tr-group'][{rowNumber}]//div[@role='gridcell']");
+
+        var input = (await rowCells.AllTextContentsAsync()).ToArray();
+
+        return input;
+    }
+
+    public async Task<List<string[]>> FindRows()
     {
         var rows = await Rows.AllAsync();
+        var rowsWithInput = new List<string[]>();
         
-        
+        foreach (var row in rows)
+        {
+            var cellValues = await row.Locator(Rows).AllTextContentsAsync();
+
+            if (cellValues.Any(cell => !string.IsNullOrWhiteSpace(cell)))
+            {
+                rowsWithInput.Add(cellValues.ToArray());
+            }
+        }
+
+        return rowsWithInput;
+    }
+    
+    public async Task<WebTablePage> ClosePage()
+    {
+        await Page!.CloseAsync();
         return this;
     }
 }
