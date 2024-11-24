@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Tests.Api\Fixtures\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Bogus" Version="35.6.1" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.11" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
@@ -29,6 +25,8 @@
       <PackageReference Include="NUnit3TestAdapter" Version="5.0.0-beta.5" />
       <PackageReference Include="NunitXml.TestLogger" Version="4.1.0" />
       <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
+      <PackageReference Include="Testcontainers" Version="4.1.0-beta.11746011829" />
+      <PackageReference Include="Testcontainers.MongoDb" Version="4.1.0-beta.11746011829" />
     </ItemGroup>
 
     <ItemGroup>
