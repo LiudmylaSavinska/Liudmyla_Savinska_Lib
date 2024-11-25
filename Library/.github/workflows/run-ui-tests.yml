@@ -1,0 +1,38 @@
+name: UI tests
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  run-ui-tests:
+    name: UI tests
+    runs-on: ubuntu-latest
+    steps:
+      #Set up .NET
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      #checkout the repository 
+      - name: Checkout code
+        uses: actions/checkout@v4
+      #restore .NET dependencies
+      - name: Restore dependencies
+        run: dotnet restore
+      #biild the project
+      - name: Build
+        run: dotnet build
+      #install playwright browsers
+      - name: Ensure browsers are installed
+        run: 
+      #run NUnit playwright tests
+      - name: Run UI tests
+        run: dotnet test /Users/lucy/Documents/Liudmyla_Savinska_Lib/Library.Test.Ui/Library.Test.Ui.csproj --logger "trx;LogFileName=test_results.trx" --results-directory /Users/lucy/Documents/Liudmyla_Savinska_Lib/Library.Test.Api/bin/Debug/net8.0/test-results
+      #upload test results as artifacts
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: /Users/lucy/Documents/Liudmyla_Savinska_Lib/Library.Test.Api/bin/Debug/net8.0/test-results

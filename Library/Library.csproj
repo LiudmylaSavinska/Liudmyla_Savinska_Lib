@@ -34,4 +34,9 @@
       <PackageReference Include="Testcontainers.MongoDb" Version="4.1.0-beta.11746011829" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include=".github\workflows\run-api-tests.yml" />
+      <Content Include=".github\workflows\run-ui-tests.yml" />
+    </ItemGroup>
+
 </Project>

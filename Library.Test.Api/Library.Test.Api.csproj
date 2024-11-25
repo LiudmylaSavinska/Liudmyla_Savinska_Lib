@@ -43,7 +43,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include=".github\workflows\run-api-tests.yml" />
       <Content Include="bin\Debug\net8.0\.msCoverageSourceRootsMapping_Library.Test.Api" />
       <Content Include="bin\Debug\net8.0\.playwright\node\darwin-arm64\node" />
       <Content Include="bin\Debug\net8.0\.playwright\node\LICENSE" />
