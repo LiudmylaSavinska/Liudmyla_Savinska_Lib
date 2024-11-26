@@ -25,7 +25,7 @@ jobs:
         run: dotnet build
       #install playwright browsers
       - name: Ensure browsers are installed
-        run: 
+        run: /Users/lucy/Documents/Liudmyla_Savinska_Lib/Library.Test.Api/bin/Debug/net8.0/playwright.ps1 install --with-deps
       #run NUnit playwright tests
       - name: Run UI tests
         run: dotnet test /Users/lucy/Documents/Liudmyla_Savinska_Lib/Library.Test.Ui/Library.Test.Ui.csproj --logger "trx;LogFileName=test_results.trx" --results-directory /Users/lucy/Documents/Liudmyla_Savinska_Lib/Library.Test.Api/bin/Debug/net8.0/test-results
