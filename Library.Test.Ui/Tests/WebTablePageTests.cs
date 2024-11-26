@@ -44,7 +44,7 @@ public class WebTablePageTests
         });
     }
     
-    [Test]
+    [Test, Order(1)]
     public async Task GoToWebTablePage_TitleIsCorrect()
     {
         var title = await Page.Title.TextContentAsync();
@@ -52,7 +52,7 @@ public class WebTablePageTests
         Assert.That(title, Is.EqualTo("Web Tables"));
     }
     
-    [Test]
+    [Test, Order(2)]
     public async Task CountTheTable_CountIsCorrect()
     {
         var rowsCount = await Page!.FindRows();
@@ -67,7 +67,7 @@ public class WebTablePageTests
             
             ));
     }
-    [Test]
+    [Test, Order(3)]
     public async Task SortByAge()
     {
         await Page.SortByAge();
@@ -82,7 +82,7 @@ public class WebTablePageTests
         });
     }
 
-    [Test]
+    [Test, Order(4)]
     public async Task ClickAddButton_ReturnRegistrationForm()
     {
         await Page.ClickAddButton();
@@ -93,11 +93,15 @@ public class WebTablePageTests
         bool registrationFormIsDisplayed = await registrationForm.IsVisibleAsync();
         
         Assert.That(registrationFormIsDisplayed, Is.True);
+        
+        await Page.CloseButton.ClickAsync();
     }
 
-    [Test]
+    [Test, Order(5)]
     public async Task FillInRegistrationForm_ReturnSavedData()
     {
+        await Page.ClickAddButton();
+        
         await Page.EnterFirstName("Liuda");
         await Page.EnterLastName("Test");
         await Page.EnterEmail("test@test.com");
