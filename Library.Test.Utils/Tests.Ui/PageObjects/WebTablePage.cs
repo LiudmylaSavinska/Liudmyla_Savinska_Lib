@@ -101,7 +101,7 @@ public class WebTablePage: IBasePage
         
         foreach (var row in rows)
         {
-            var cellValues = await row.Locator(Rows).AllTextContentsAsync();
+            var cellValues = await row.Locator("div[role='gridcell']").AllTextContentsAsync();
 
             if (cellValues.Any(cell => !string.IsNullOrWhiteSpace(cell)))
             {

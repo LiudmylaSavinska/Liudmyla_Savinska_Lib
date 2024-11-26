@@ -21,7 +21,7 @@ public class WebTablePageTests
         Page = await _browserSetUpBuilder
             .WithBrowser(BrowserType.Chromium)
             .WithChannel("chrome")
-            .InHeadlessMode(false)
+            .InHeadlessMode(true)
             .WithSlowMo(100)
             .WithTimeout(10000)
             .WithVideoSize(1900, 1080)
@@ -50,6 +50,36 @@ public class WebTablePageTests
         var title = await Page.Title.TextContentAsync();
 
         Assert.That(title, Is.EqualTo("Web Tables"));
+    }
+    
+    [Test]
+    public async Task CountTheTable_CountIsCorrect()
+    {
+        var rowsCount = await Page!.FindRows();
+        var columns = await Page!.Columns.CountAsync();
+
+        Assert.Multiple((() => 
+                
+                {
+                    Assert.That(rowsCount.Count, Is.EqualTo(3));
+                    Assert.That(columns, Is.EqualTo(7));
+                } 
+            
+            ));
+    }
+    [Test]
+    public async Task SortByAge()
+    {
+        await Page.SortByAge();
+        
+        var rowOne = await Page!.GetRowValues(1);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(rowOne[0], Is.EqualTo("Kierra"));
+            Assert.That(rowOne[2], Is.EqualTo("29"));
+
+        });
     }
 
     [Test]
@@ -83,20 +113,6 @@ public class WebTablePageTests
      
     }
     
-    [Test]
-    public async Task SortByAge()
-    {
-        await Page.SortByAge();
-        
-        var rowOne = await Page!.GetRowValues(1);
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(rowOne[0], Is.EqualTo("Liuda"));
-            Assert.That(rowOne[2], Is.EqualTo("25"));
-
-        });
-    }
 
     [TearDown]
     public async Task TearDown()
