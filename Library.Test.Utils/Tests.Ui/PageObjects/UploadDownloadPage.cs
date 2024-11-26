@@ -23,7 +23,7 @@ public class UploadDownloadPage: IBasePage
     {
         await ChoosefileButton.ClickAsync();
         
-        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "NewFile1.txt");
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Tests.UI", "AppData", "NewFile1.txt");
         await Page!.SetInputFilesAsync("input[type='file']", filePath);
 
         return this;
